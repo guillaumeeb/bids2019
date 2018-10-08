@@ -19,12 +19,12 @@
 
 % Title.
 % ------
-\title{AUTHOR GUIDELINES FOR BiDS'19 PROCEEDINGS MANUSCRIPTS}
+\title{THE PANGEO BIG DATA ECOSYSTEM AND ITS USE AT CNES}
 %
 % Single address.
 % ---------------
-\name{Author(s) Name(s)\thanks{Thanks to XYZ agency for funding.}}
-\address{Author Affiliation(s)}
+\name{Guillaume Eynard-Bontemps, Joseph Hamman, Ryan Abernathey, Matthew Rocklin, Aurélien Ponte}%\thanks{Thanks to XYZ agency for funding.}}
+\address{CNES, NCAR, Columbia, Anaconda, Ifremer}
 %
 % For example:
 % ------------
@@ -51,120 +51,99 @@
 \maketitle
 %
 \begin{abstract}
-The abstract should appear at the top of the left-hand column of text, about
-0.5 inch (12 mm) below the title area and no more than 3.125 inches (80 mm) in
-length.  Leave a 0.5 inch (12 mm) space between the end of the abstract and the
-beginning of the main text.  The abstract should contain about 100 to 150
-words, and should be identical to the abstract text submitted electronically
-along with the paper cover sheet.  All manuscripts must be in English, printed
-in black ink.
+Pangeo\cite{b1} is a community driven effort for open-source big-data intially focused on the Earth System Sciences. It represents at the same time a collaboration of people and a platform composed of open source scientific python packages like Jupyter, Dask and Xarray. One of its goal is to improve scalability of these tools to handle petabyte-scale datasets on HPC or public cloud infrastructure.
+In this paper, we will first describe Pangeo: its motivation, community, the underlying technology stack and associated deployments, different applications and the on going work. On a second part, we will present its use in CNES: HPC deployment, some simple and more complicated use cases, and what we are planning to do.
 \end{abstract}
 %
 \begin{keywords}
-One, two, three, four, five
+Pangeo, Dask, Jupyter, HPC, Cloud, Big Data, Analysis
 \end{keywords}
 %
-\section{Introduction}
-\label{sec:intro}
+\section{Pangeo}
+\label{sec:pangeo}
 
-These guidelines include complete descriptions of the fonts, spacing, and
-related information for producing your proceedings manuscripts. 
+\subsection{Motivations, mission and goals}
+\label{ssec:motivations}
 
-\section{Formatting your paper}
-\label{sec:format}
+There are several building crises facing the geoscience community:
 
-All printed material, including text, illustrations, and charts, must be kept
-within a print area of 7 inches (178 mm) wide by 9 inches (229 mm) high. Do
-not write or print anything outside the print area. The top margin must be 1
-inch (25 mm), except for the title page, and the left margin must be 0.75 inch
-(19 mm).  All {\it text} must be in a two-column format. Columns are to be 3.39
-inches (86 mm) wide, with a 0.24 inch (6 mm) space between them. Text must be
-fully justified.
+\begin{itemize}
+\item Big Data: datasets are growing too rapidly and legacy software tools for scientific analysis can’t handle them. This is a major obstacle to scientific progress.
+\item Technology Gap: a growing gap between the technological sophistication of industry solutions (high) and scientific software (low).
+\item Reproducibility: a fragmentation of software tools and environments renders most geoscience research effectively unreproducible and prone to failure.
+\end{itemize}
 
-\section{PAGE TITLE SECTION}
-\label{sec:pagestyle}
+Pangeo aims to address these challenges through a unified, collaborative effort.
 
-The paper title (on the first page) should begin 1.38 inches (35 mm) from the
-top edge of the page, centered, completely capitalized, and in Times 14-point,
-boldface type.  The authors' name(s) and affiliation(s) appear below the title
-in capital and lower case letters.  Papers with multiple authors and
-affiliations may require two or more lines for this information.
+Our mission is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.
 
-\section{TYPE-STYLE AND FONTS}
-\label{sec:typestyle}
+To accomplish this mission, we have identified three specific goals.
+\begin{itemize}
+\item Foster collaboration around the open source scientific python ecosystem for ocean / atmosphere / land / climate science.
+\item Support the development with domain-specific geoscience packages.
+\item Improve scalability of these tools to handle petabyte-scale datasets on HPC and cloud platforms.
+\end{itemize}
 
-To achieve the best rendering both in the proceedings and from the CD-ROM, we
-strongly encourage you to use Times-Roman font.  In addition, this will give
-the proceedings a more uniform look.  Use a font that is no smaller than nine
-point type throughout the paper, including figure captions.
+\subsection{Community}
+\label{ssec:community}
 
-In nine point type font, capital letters are 2 mm high.  {\bf If you use the
-smallest point size, there should be no more than 3.2 lines/cm (8 lines/inch)
-vertically.}  This is a minimum spacing; 2.75 lines/cm (7 lines/inch) will make
-the paper much more readable.  Larger type sizes require correspondingly larger
-vertical spacing.  Please do not double-space your paper.  TrueType or
-Postscript Type 1 fonts are preferred.
+One crutial attribute of Pangeo is to be community driven. The goal is of course to have the most wider and open comunity as possible. All the effort are made in the open on github, any one can join or get involved in the community. 
 
-The first paragraph in each section should not be indented, but all the
-following paragraphs within the section should be indented as these paragraphs
-demonstrate.
+The community is already quite diverse, from academic research, going through government agency up to open source developers. A lot of different nationalities are represented too: from USA of course, but also UK, France or Australia to name a few.
 
-\section{MAJOR HEADINGS}
-\label{sec:majhead}
+\subsection{Technology stack}
+\label{ssec:techstack}
 
-Major headings, for example, "1. Introduction", should appear in all capital
-letters, bold face if possible, centered in the column, with one blank line
-before, and one blank line after. Use a period (".") after the heading number,
-not a colon.
+Jupyter/Dask/Xarray scheme \ref{pangeo_stack} and explanation.
 
-\subsection{Subheadings}
-\label{ssec:subhead}
+Present all three, the cloud and HPC also.
 
-Subheadings should appear in lower case (initial word capitalized) in
-boldface.  They should start at the left margin on a separate line.
- 
-\subsubsection{Sub-subheadings}
-\label{sssec:subsubhead}
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{pangeo_stack.png}
+  \caption{\label{pangeo_stack} Pangeo platform main components.}
+\end{figure}
 
-Sub-subheadings, as in this paragraph, are discouraged. However, if you
-must use them, they should appear in lower case (initial word
-capitalized) and start at the left margin on a separate line, with paragraph
-text beginning on the following line.  They should be in italics.
+\subsection{Applications}
+\label{ssec:applications}
 
-\section{PRINTING YOUR PAPER}
-\label{sec:print}
+Go through one Pangeo example and also the last blog post from Scott Henderson.
 
-Print your properly formatted text on high-quality, 8.5 x 11-inch white printer
-paper. A4 paper is also acceptable, but please leave the extra 0.5 inch (12 mm)
-empty at the BOTTOM of the page and follow the top and left margins as
-specified.  If the last page of your paper is only partially filled, arrange
-the columns so that they are evenly balanced if possible, rather than having
-one long column.
+\subsection{On going work}
+\label{ssec:ongowork}
 
-In LaTeX, to start a new column (but not a new page) and help balance the
-last-page column lengths, you can use the command ``$\backslash$pagebreak'' as
-demonstrated on this page (see the LaTeX source below).
+Binder, Community governance, subdomains and Continuous deployment, Cluster Manager rationalization...
 
-\section{PAGE NUMBERING}
-\label{sec:page}
+\section{CNES deployment and use cases}
+\label{sec:cnes}
 
-Please do {\bf not} paginate your paper.  Page numbers, session numbers, and
-conference identification will be inserted when the paper is included in the
-proceedings.
+\subsection{Context and HPC System}
+\label{ssec:context}
 
-\section{ILLUSTRATIONS, GRAPHS, AND PHOTOGRAPHS}
-\label{sec:illust}
+CNES various science, heavy simulations through launchers or flight dynamics, but majority of data processing : remote sensing, astronomy, climate.
 
-Illustrations must appear within the designated margins.  They may span the two
-columns.  If possible, position illustrations at the top of columns, rather
-than in the middle or at the bottom.  Caption and number every illustration.
-All halftone illustrations must be clear black and white prints.  Colors may be
-used, but they should be selected so as to be readable when printed on a
-black-only printer.
+Main processing platform is our cluster HAL: modestly sized High Performance Computer: 8000 cores, 6PB storage. PBS Pro.
 
-Since there are many ways, often incompatible, of including images (e.g., with
-experimental results) in a LaTeX document, below are two examples of how to do
-this Fig. \ref{fig_example} and Fig. \ref{fig:res}.
+\subsection{From embarrassingly parallel to more complex workflow with Dask}
+\label{ssec:usecase1}
+
+Embarrassingly parallel simulation
+
+Before: complex and unreadable batch scripts, launching PBS arrays, writting millions of small results on shared storage.
+
+With Dask: elegant python code, scaling easily, in memory data exchange...
+
+Add some post processing
+
+Add some CSV file generation, build of a dask dataframe, reduction of results, launch of a new simulation...
+
+\subsection{Simulating remote sensing data through dask array}
+\label{ssec:usecase2}
+
+Generating a lot of Dask array that needs to be sum.
+Memory problem, rechunking...
+
+\ref{fig_example} and Fig. \ref{fig:res}.
 
 % Below is an example of how to insert images. Delete the ``\vspace'' line,
 % uncomment the preceding line ``\centerline...'' and replace ``imageX.ps''
@@ -200,49 +179,12 @@ this Fig. \ref{fig_example} and Fig. \ref{fig:res}.
 \end{figure}
 
 
-\section{TABLES}
-\label{sec:tables}
-
-Tables can be positioned in any place along a column. Large tables may span across both columns. Table heads should appear above the tables. Tables need to be inserted after they are cited in the text. Table \ref{table_example} demonstrates an example.
-
-\begin{table}
-\caption{Example of a table format.}
-\label{table_example}
-\centering
-\begin{tabular}{|c|c|c|c|}
-\hline \hline
-\textbf{Name} & \textbf{Magnitude} & \textbf{Spec} & \textbf{Value} \\
-\hline
-x & 16 & a & 64 \\
-\hline
-y & 8 & b  & 32 \\
-\hline
-z & 24 & c  & 16  \\
-\hline \hline
-\end{tabular}
-\end{table}
-
 % To start a new column (but not a new page) and help balance the last-page
 % column length use \vfill\pagebreak.
 % -------------------------------------------------------------------------
 \vfill
 \pagebreak
 
-
-\section{FOOTNOTES}
-\label{sec:foot}
-
-Use footnotes sparingly (or not at all!) and place them at the bottom of the
-column on the page on which they are referenced. Use Times 9-point type,
-single-spaced. To help your readers, avoid using footnotes altogether and
-include necessary peripheral observations in the text (within parentheses, if
-you prefer, as in this sentence).
-
-
-\section{On Bibliographical references}
-\label{sec:foot}
-
-List and number all bibliographical references at the end of the paper.  The references can be numbered in alphabetic order or in order of appearance in the document.  When referring to them in the text, type the corresponding reference number in square brackets as shown at the end of this sentence \cite{b1}.
 
 % References should be produced using the bibtex program from suitable
 % BiBTeX files 
@@ -254,7 +196,7 @@ List and number all bibliographical references at the end of the paper.  The ref
 \small
 
 \begin{thebibliography}{00}
-\bibitem{b1} A. Author, and B. Author, ``Article presented in the conference,'' "Proc. of the 2017 conference on Big Data from Space (BiDS'17), Publications Office of the European Union, doi: \href{http://dx.doi.org/10.2760/383579}{10.2760/383579}, 2017. 
+\bibitem{b1} Abernathey, Ryan; paul, kevin; hamman, joe; rocklin, matthew; lepore, chiara; tippett, michael; et al. (2017): Pangeo NSF Earthcube Proposal. figshare. \href{https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094}{Figshare paper}. 
 \end{thebibliography}
 
 \end{document}
