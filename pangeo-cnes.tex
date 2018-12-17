@@ -54,12 +54,26 @@ $^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et
 \maketitle
 %
 \begin{abstract}
-Pangeo\cite{b1} is a community driven effort for open-source big data initially focused on the Earth System Sciences. It represents both a collaboration of people and a specific platform composed of open source Scientific Python packages like Jupyter, Dask and xarray. A primary goal of the collaboration is to improve scalability of these tools to handle petabyte-scale datasets on high-performance computing (HPC) or public cloud infrastructure.
-In this paper, we first describe Pangeo: its motivation, community, the underlying technology stack and associated deployments, different applications and the ongoing work. We then present its use at CNES: the context, HPC deployment, and several use cases. We will then conclude with a future outlook for Pangeo in this agency.
+Pangeo\cite{b1} is a community driven effort for open-source big data initially
+focused on the Earth System Sciences.  Its primary goal is to enable scientists
+in analyzing peta-scale datasets both on classical high-performacnce computing
+(HPC) and on public cloud infrastructure.  In only a few years, Pangeo has
+grown into a very active community collaborating on the development of
+open-source analysis tools for ocean, atmosphere and climate science, and
+beyond.  It provides a set of example deployments based on open-source
+Scientific Python packages like Jupyter, Dask, and xarray that not only serve as
+working environments for actual scientific work, but also bring together
+developers with users and their actual use-cases.
+
+In this paper, we first describe Pangeo: its motivation, community, the
+underlying technology stack and associated deployments, the different
+applications and the ongoing work. We then present its impact on the work of
+scientists from CNES: the context, an HPC deployment, and several use cases.
+We will conclude with a future outlook for Pangeo in this agency and beyond.
 \end{abstract}
 %
 \begin{keywords}
-Pangeo, Dask, Jupyter, HPC, Cloud, Big Data, Analysis
+Pangeo, Dask, Jupyter, HPC, Cloud, Big Data, Analysis, Open Source
 \end{keywords}
 %
 \section{Pangeo}
@@ -185,7 +199,7 @@ CNES main processing platform is a modestly sized High Performance Computer name
 
 Pangeo platform has recently been deployed on the cluster, which basically means the configuration of two main components: a JupyterHub and Dask through dask-jobqueue (see \ref{dask_jobqueue} for a graphical overview).
 
-JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launch user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook. 
+JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launch user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook.
 
 CNES directly contributes to dask-jobqueue in order to improve its usability on HAL. This Python module deployment (alike Xarray or other domain scientific library) is quite simple as it can be done through conda or pip packaging system. A template configuration is proposed to all HAL users. There is also a few commands documented in order to be able to use the Python environment and thus create Dask clusters from inside Jupyter, some demonstration notebooks have been shared internally.
 
@@ -228,7 +242,7 @@ At CNES, we decided to focus on this tooling for our shared computing infrastruc
 
 
 % References should be produced using the bibtex program from suitable
-% BiBTeX files 
+% BiBTeX files
 % -------------------------------------------------------------------------
 
 \bibliographystyle{plainnat}
@@ -237,12 +251,12 @@ At CNES, we decided to focus on this tooling for our shared computing infrastruc
 \small
 
 \begin{thebibliography}{00}
-\bibitem{b1} Ryan Abernathey, Kevin Paul, Joseph Hamman, Matthew Rocklin, Chiara Lepore, Michaem Tippett, et al. (2017): \href{https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094}{Pangeo NSF Earthcube Proposal}. 
-\bibitem{b2} Mark McInerney, ESDIS Project Deputy Project Manager/Technical: EOSDIS Cloud Evolution\href{https://earthdata.nasa.gov/about/eosdis-cloud-evolution}{NASA EOSDIS web site}. 
-\bibitem{b3} Ryan Abernathey et al: \href{https://github.com/pangeo-data/pangeo/issues}{Pangeo github project issue tracker}. 
-\bibitem{b4} Joseph Hamman, Matthew Rocklin, Jim Edwards, Guillaume Eynard-Bontemps, Loïc Estève (2018): \href{https://medium.com/pangeo/dask-jobqueue-d7754e42ca53}{Scalable interactive analysis workflows using dask on HPC Systems}. 
-\bibitem{b5} Pangeo community: \href{http://pangeo.io/use_cases/index.html}{Pangeo use cases}. 
-\bibitem{b6} Scott Henderson, Daniel Rothenberg, Matthew Rocklin, Ryan Abernathey, Joseph Hamman, Rich Signell, and Rob Fatland: \href{https://medium.com/pangeo/cloud-native-geoprocessing-of-earth-observation-satellite-data-with-pangeo-997692d91ca2}{Cloud Native Geoprocessing of Earth Observation Satellite Data with Pangeo}. 
+\bibitem{b1} Ryan Abernathey, Kevin Paul, Joseph Hamman, Matthew Rocklin, Chiara Lepore, Michaem Tippett, et al. (2017): \href{https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094}{Pangeo NSF Earthcube Proposal}.
+\bibitem{b2} Mark McInerney, ESDIS Project Deputy Project Manager/Technical: EOSDIS Cloud Evolution\href{https://earthdata.nasa.gov/about/eosdis-cloud-evolution}{NASA EOSDIS web site}.
+\bibitem{b3} Ryan Abernathey et al: \href{https://github.com/pangeo-data/pangeo/issues}{Pangeo github project issue tracker}.
+\bibitem{b4} Joseph Hamman, Matthew Rocklin, Jim Edwards, Guillaume Eynard-Bontemps, Loïc Estève (2018): \href{https://medium.com/pangeo/dask-jobqueue-d7754e42ca53}{Scalable interactive analysis workflows using dask on HPC Systems}.
+\bibitem{b5} Pangeo community: \href{http://pangeo.io/use_cases/index.html}{Pangeo use cases}.
+\bibitem{b6} Scott Henderson, Daniel Rothenberg, Matthew Rocklin, Ryan Abernathey, Joseph Hamman, Rich Signell, and Rob Fatland: \href{https://medium.com/pangeo/cloud-native-geoprocessing-of-earth-observation-satellite-data-with-pangeo-997692d91ca2}{Cloud Native Geoprocessing of Earth Observation Satellite Data with Pangeo}.
 \bibitem{b7} Ryan Abernathey: \href{https://medium.com/pangeo/step-by-step-guide-to-building-a-big-data-portal-e262af1c2977}{Step-by-Step Guide to Building a Big Data Portal}.
 \bibitem{b8} Joseph Hamman, Ryan Abernathey: \href{https://medium.com/pangeo/pangeo-meets-binder-2ea923feb34f}{Pangeo meets Binder}.
 \bibitem{b9} S. Fresnay, A. L. Ponte, S. Le Gentil, and J. Le Sommer: Reconstruction of the 3-D Dynamics From Surface Variables in
