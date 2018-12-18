@@ -146,10 +146,11 @@ Pangeo's software ecosystem fits directly into the Scientific Python stack, invo
 There are several developments that either started in or are fueled by the
 Pangeo community:
 \begin{itemize}
-\item Modules to automatically deploy Dask distributed clusters in various infrastructures are being developed: dask-kubernetes for Kubernetes clusters and thus the public cloud, dask-jobqueue\cite{b4} for HPC systems using scheduler such as Slurm, PBS Pro or LSF, and dask-yarn for YARN clusters (i.e. Hadoop).
+\item Modules to automatically deploy Dask distributed clusters in various infrastructures are being developed: dask-kubernetes for Kubernetes clusters and thus for the public cloud, dask-jobqueue\cite{b4} for HPC systems using scheduler such as Slurm, PBS Pro or LSF, and dask-yarn for YARN clusters (i.e. Hadoop).
 \item The integration of a Zarr backend in xarray paved the way to directly access cloud-based object storage in parallel computations.
 \item ...
 \end{itemize}
+
 
 \subsection{Deployments}
 \label{ssec:deployments}
@@ -160,16 +161,16 @@ The GitHub community offers online documentation, scripts and other tools to lin
 \subsection{Applications}
 \label{ssec:applications}
 
-Pangeo's first scientific domain is earth sciences: particularly the domains of oceanographic, terrestrial, atmospheric, and climate sciences. There are already many applications documented in these fields. Some real science use cases can be found online\cite{b5}; these examples, along with their data, can be directly executed from a web browser. We can for example cite \textit{Sea Surface Altimetry Data Analysis} that explore the increase of global mean sea level over 20 years of data, or also \textit{US Precipitation and Temperature Analysis} that explore meteorological gridded ensemble precipitation and temperature estimates over the contiguous United States.
+Pangeo's first scientific domain are the earth-system sciences. There are already many applications documented in these fields. Some real science use cases can be found online\cite{b5}; these examples, along with their data, can be directly executed on cloud infrastructure and be controlled from a web browser.
 
 Other scientific domains have developed an interest in the Pangeo approach, including:
 \begin{itemize}
-\item Satellite imagery analysis: a recent blog post\cite{b6} explains how to use Pangeo for processing and analysing in real time Landsat imagery. NASA has decided to fund Pangeo initiative for applying the ecosystem on remote sensing datasets that are being pushed on AWS.
+\item Satellite imagery analysis: a recent blog post\cite{b6} explains how to use Pangeo for processing and analysing in real time Landsat imagery. NASA has decided to fund Pangeo initiative for applying the ecosystem on remote sensing datasets that are being pushed on AWS\cite{b10}.
 \item Astronomy: several scientists are already using the web platform to explore Gaia DR2 data on GCE.
 \item Neuroscience: there is some on-going work to use Pangeo for analysis on human brain or electrophysiological datasets.
 \end{itemize}
 
-Such applications are most effective when deployed on cloud-optimized datasets. This means that data must be accessible in a cloud or distributed storage friendly format, like Zarr for multi-dimensional data, Cloud optimized Geotiff for satellite imagery, or Parquet for tabular data. See \cite{b7} for more details on this crucial point. Formats like NetCDF or CSV files are not adapted or optimized for use at scale.
+Applications combining large data sets from different sources are most effective when deployed on cloud infrastructure.  This means that data must be accessible in a cloud or distributed storage friendly format, like Zarr for multi-dimensional data, Cloud optimized Geotiff for satellite imagery, or Parquet for tabular data. See \cite{b7} for more details on this crucial point.
 
 \subsection{Ongoing work}
 \label{ssec:ongowork}
@@ -275,5 +276,6 @@ At CNES, we decided to focus on this tooling for our shared computing infrastruc
 \bibitem{b8} Joseph Hamman, Ryan Abernathey: \href{https://medium.com/pangeo/pangeo-meets-binder-2ea923feb34f}{Pangeo meets Binder}.
 \bibitem{b9} S. Fresnay, A. L. Ponte, S. Le Gentil, and J. Le Sommer: Reconstruction of the 3-D Dynamics From Surface Variables in
 a High-Resolution Simulation of North Atlantic. \href{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017JC013400}{DOI: 10.1002/2017JC013400}.
+\bibitem{b10} Joe Hamman: \href{https://medium.com/pangeo/nasa-access-c3515a44f31b}{Pangeo applications for NASA Earth Observing Data}.
 \end{thebibliography}
 \end{document}
