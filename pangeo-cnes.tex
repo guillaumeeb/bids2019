@@ -132,9 +132,9 @@ institution could alone.
 
 Pangeo's software ecosystem fits directly into the Scientific Python stack, involving packages such as Numpy, Pandas, or Sickit-learn.  Three Python software projects are at the core of Pangeo:
 \begin{itemize}
-\item Dask is a library for parallel computing that coordinates with Python’s existing scientific software ecosystem, including libraries cited above.  In many cases, it offers users the ability to take existing workflows and quickly scale them to much larger applications. Dask-distributed is an extension of Dask that facilitates parallel execution across many computers.
-\item Xarray is the interface for working with big datasets: it provides a Pandas like API for labelled n-dimensional arrays and has backends for established and upcoming self-describing community data file formats and access protocols like netCDF, GeoTIFF, OPeNDAP, and Zarr.  Xarray transparently integrates Dask arrays and hence enables users to easily scale up their work up to massively parallel computations.
-\item Jupyter: Jupyter notebooks, Jupyter Lab enable interactive computing and analysis from a web browser, and JupyterHub adds multi-user support.  Jupyter notebooks are quickly becoming the standard open-source format for interactive computing not only in Python, but also in languages such as Julia and R.
+\item Dask is a library for parallel and distributed computing that coordinates with Python’s existing scientific software ecosystem.  In many cases, it offers users the ability to take existing workflows and quickly scale them to much larger applications.
+\item Xarray is the interface for working with big datasets: it provides a Pandas-like API for labelled n-dimensional arrays and has backends for established and upcoming self-describing community data file formats and access protocols like netCDF, GeoTIFF, OPeNDAP, and Zarr.  Xarray transparently integrates Dask arrays and hence enables users to easily scale their work to massively parallel computations.
+\item Jupyter: Jupyter notebooks and Jupyter Lab enable interactive computing and analysis from a web browser, and JupyterHub adds multi-user support.  Jupyter notebooks are quickly becoming the standard open-source format for interactive computing not only in Python, but also in languages such as Julia and R.
 \end{itemize}
 
 \begin{figure}
