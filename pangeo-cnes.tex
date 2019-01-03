@@ -23,11 +23,12 @@
 %
 % Single address.
 % ---------------
-\name{Guillaume Eynard-Bontemps$^1$, Ryan Abernathey$^2$, Joseph Hamman$^3$, Aurelien Ponte$^4$}%\thanks{Thanks to XYZ agency for funding.}}
+\name{Guillaume Eynard-Bontemps$^1$, Ryan Abernathey$^2$, Joseph Hamman$^3$, Aurelien Ponte$^4$, Willi Rath$^5$}%\thanks{Thanks to XYZ agency for funding.}}
 \address{$^1$Centre National d'Etudes Spatiales (CNES), Toulouse, France,\\
 $^2$Columbia University / Lamont Doherty Earth Observatory, New-York, USA,\\
 $^3$National Center for Atmospheric Research (NCAR), Boulder, USA,\\
-$^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et Spatiale (LOPS), IUEM, Brest 29280, France}
+$^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et Spatiale (LOPS), IUEM, Brest 29280, France,\\
+$^5$GEOMAR Helmholtz Centre for Ocean Research Kiel, Kiel, Germany.}
 %
 % For example:
 % ------------
@@ -54,12 +55,27 @@ $^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et
 \maketitle
 %
 \begin{abstract}
-Pangeo\cite{b1} is a community driven effort for open-source big data initially focused on the Earth System Sciences. It represents both a collaboration of people and a specific platform composed of open source Scientific Python packages like Jupyter, Dask and xarray. A primary goal of the collaboration is to improve scalability of these tools to handle petabyte-scale datasets on high-performance computing (HPC) or public cloud infrastructure.
-In this paper, we first describe Pangeo: its motivation, community, the underlying technology stack and associated deployments, different applications and the ongoing work. We then present its use at CNES: the context, HPC deployment, and several use cases. We will then conclude with a future outlook for Pangeo in this agency.
+Pangeo\cite{b1} is a community-driven effort for open-source big data initially
+focused on the Earth System Sciences.  One of its primary goals is to enable
+scientists in analyzing peta-scale datasets both on classical high-performance
+computing (HPC) and on public cloud infrastructure.  In only a few years, Pangeo
+has grown into a very productive community collaborating on the development of
+open-source analysis tools for ocean, atmosphere and climate science, and
+beyond.  It provides a set of example deployments based on open-source
+Scientific Python packages like Jupyter\cite{b14}, Dask\cite{b12},
+and xarray\cite{b13} that not only serve as working environments for
+actual scientific work, but also bring together developers with users and their
+actual use-cases.
+
+In this paper, we first describe Pangeo: its motivation, community, the
+underlying technology stack and associated deployments, the different
+applications and the ongoing work. We then present its impact on the work of
+scientists from CNES: the context, an HPC deployment, and several use cases.
+We will conclude with a future outlook for Pangeo in this agency and beyond.
 \end{abstract}
 %
 \begin{keywords}
-Pangeo, Dask, Jupyter, HPC, Cloud, Big Data, Analysis
+Pangeo, Dask, Jupyter, HPC, Cloud, Big Data, Analysis, Open Source
 \end{keywords}
 %
 \section{Pangeo}
@@ -83,45 +99,44 @@ The geoscience community is facing several building crises:
 \end{figure}
 
 
-Pangeo is a collaborative effort that aims to address these challenges in a unified way.
-The core mission is to cultivate a collaborative environment in which the next generation of open-source analysis tools for ocean, atmosphere, climate and eventually other sciences can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future challenges of big data, and these solutions should leverage the existing expertise both inside and outside of the geoscience community.
+Pangeo's core mission is to cultivate a collaborative environment in which the
+next generation of open-source analysis tools for ocean, atmosphere, climate and
+eventually other sciences can be developed, distributed, and sustained. These
+tools must be scalable in order to meet the current and future challenges of big
+data, and these solutions should leverage the existing expertise both inside and
+outside of the geoscience community.
 
-To accomplish this mission, Pangeo collaborators have identified three specific goals.
-
+To accomplish this mission, Pangeo collaborators have identified three specific
+goals.
 \begin{itemize}
 \item Foster collaboration around the open source Scientific Python ecosystem for the oceanographic, atmospheric, terrestrial, and climate science.
 \item Support the development with domain-specific geoscience packages.
-\item Improve scalability of these tools to handle petabyte-scale datasets on high-performance computing (HPC) and cloud computing platforms.
+\item Improve scalability of these tools to handle petabyte-scale datasets on HPC and on cloud computing platforms.
 \end{itemize}
 
 \subsection{Community}
 \label{ssec:community}
 
-Rather than being controlled by a single organization, Pangeo aims to be a community driven project, in the model of successful open-source software like Linux, Python, and Jupyter. By making the collaboration as broad as possible, Pangeo can leverage shared expertise to accomplish things no institution could alone. In this spirit, all Pangeo discussions and products occur on GitHub\cite{b3}, where anyone can easily get involved in the community.
-This community is already quite diverse, including those from governmental agencies, universities, and private companies. Many nationalities are represented as well, including members from USA, UK, France, and Australia to name a few.
+Rather than being controlled by a single organization, Pangeo is a
+community-driven project, in the model of successful open-source software like
+Linux, Python, and Jupyter.  In this spirit, all Pangeo discussions and products
+occur on GitHub\cite{b3}, where anyone can easily get involved in the community.
+As of today, Pangeo spans a list of people from different governmental agencies,
+universities, or private companies, and from different countries (the USA, the
+UK, France, Austalia to name a few).  By making the collaboration as broad as
+possible, Pangeo successfully leverages shared expertise to accomplish things no
+institution could alone.
 
 
-\subsection{Technology stack}
+\subsection{Technology contributions to the Scientific Python stack}
 \label{ssec:techstack}
 
-Pangeo software ecosystem fits directly in the Scientific Python stack, involving well known packages such as Numpy, Pandas, or Sickit-learn.
-
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=\columnwidth]{pangeo_python_stack.png}
-%  \caption{\label{scipy_stack} Pangeo Scientific Python ecosystem.}
-%\end{figure}
-
-Three Python software projects are at the core of Pangeo:
+Pangeo's software ecosystem fits directly into the Scientific Python stack, involving packages such as Numpy, Pandas, or Sickit-learn.  Three Python software projects are at the core of Pangeo:
 \begin{itemize}
-\item Jupyter: Jupyter notebooks, Jupyter Lab, and JupyterHub enable interactive computing and analysis from a web browser and multiple user support. They are quickly becoming the standard open-source format for interactive computing in Python, as well as other languages such as Julia and R.
-\item Dask is a library for parallel computing that coordinates with Python’s existing scientific software ecosystem, including libraries cited above. In many cases, it offers users the ability to take existing workflows and quickly scale them to much larger applications. Dask-distributed is an extension of Dask that facilitates parallel execution across many computers.
-\item Xarray is the interface for working with big datasets: it offers a Pandas like API for dealing with labelled n-dimensionnal arrays with a self-describing scientific data capability and strong backends to standard and upcoming community data file formats and access (e.g. netCDF, GeoTIFFs, OPeNDAP).
+\item Dask is a library for parallel and distributed computing that coordinates with Python’s existing scientific software ecosystem.  In many cases, it offers users the ability to take existing workflows and quickly scale them to much larger applications.
+\item Xarray is the interface for working with big datasets: it provides a Pandas-like API for labelled n-dimensional arrays and has backends for established and upcoming self-describing community data file formats and access protocols like netCDF, GeoTIFF, OPeNDAP, and Zarr.  Xarray transparently integrates Dask arrays and hence enables users to easily scale their work to massively parallel computations.
+\item Jupyter: Jupyter notebooks and Jupyter Lab enable interactive computing and analysis from a web browser, and JupyterHub adds multi-user support.  Jupyter notebooks are quickly becoming the standard open-source format for interactive computing not only in Python, but also in languages such as Julia and R.
 \end{itemize}
-
-The GitHub community offers online documentation, scripts and other tools to link them together in order to deploy a Pangeo platform (see \ref{pangeo_stack}) and put the software stack on HPC systems or in the public cloud. The main elements allowing to build and use the platforms along the core libraries are first a set of scripts and documentation that allows automatically creating the necessary cloud infrastructure. Currently available for Google Cloud Engine (GCE), and work is underway for Amazon Web Services (AWS) compatibility. Terraform software and CI/CD tooling are also under active development and offer the potential for automating these tasks.
-
-Modules to automatically deploy distributed clusters in various infrastructures are being developed: dask-kubernetes for Kubernetes clusters and thus the public cloud, dask-jobqueue\cite{b4} for HPC systems using scheduler such as Slurm, PBS Pro or LSF, and dask-yarn for YARN clusters (i.e. Hadoop).
 
 \begin{figure}
   \centering
@@ -129,29 +144,49 @@ Modules to automatically deploy distributed clusters in various infrastructures 
   \caption{\label{pangeo_stack} Pangeo platform main components.}
 \end{figure}
 
+There are several developments that either started in or are fueled by the
+Pangeo community:
+\begin{itemize}
+\item Modules to automatically deploy Dask distributed clusters in various infrastructures are being developed: dask-kubernetes for Kubernetes clusters and thus for the public cloud, dask-jobqueue\cite{b4} for HPC systems using scheduler such as Slurm, PBS Pro or LSF, and dask-yarn for YARN clusters (i.e. Hadoop).
+\item The integration of a Zarr backend in xarray paved the way to directly access cloud-based object storage in parallel computations.
+\item ...
+\end{itemize}
+
+
+\subsection{Deployments}
+\label{ssec:deployments}
+
+The GitHub community offers online documentation, scripts and other tools to link them together in order to deploy a Pangeo platform (see \ref{pangeo_stack}) and put the software stack on HPC systems or in the public cloud. The main elements allowing to build and use the platforms along the core libraries are first a set of scripts and documentation that allows automatically creating the necessary cloud infrastructure. Currently available for Google Cloud Engine (GCE), and work is underway for Amazon Web Services (AWS) compatibility. Terraform software and CI/CD tooling are also under active development and offer the potential for automating these tasks.
+
+
 \subsection{Applications}
 \label{ssec:applications}
 
-Pangeo's first scientific domain is earth sciences: particularly the domains of oceanographic, terrestrial, atmospheric, and climate sciences. There are already many applications documented in these fields. Some real science use cases can be found online\cite{b5}; these examples, along with their data, can be directly executed from a web browser. We can for example cite \textit{Sea Surface Altimetry Data Analysis} that explore the increase of global mean sea level over 20 years of data, or also \textit{US Precipitation and Temperature Analysis} that explore meteorological gridded ensemble precipitation and temperature estimates over the contiguous United States.
+Pangeo's first scientific domain are the earth-system sciences. There are already many applications documented in these fields. Some real science use cases can be found online\cite{b5}; these examples, along with their data, can be directly executed on cloud infrastructure and be controlled from a web browser.
 
 Other scientific domains have developed an interest in the Pangeo approach, including:
 \begin{itemize}
-\item Satellite imagery analysis: a recent blog post\cite{b6} explains how to use Pangeo for processing and analysing in real time Landsat imagery. NASA has decided to fund Pangeo initiative for applying the ecosystem on remote sensing datasets that are being pushed on AWS.
+\item Satellite imagery analysis: a recent blog post\cite{b6} explains how to use Pangeo for processing and analysing in real time Landsat imagery. NASA has decided to fund Pangeo initiative for applying the ecosystem on remote sensing datasets that are being pushed on AWS\cite{b10}.
 \item Astronomy: several scientists are already using the web platform to explore Gaia DR2 data on GCE.
 \item Neuroscience: there is some on-going work to use Pangeo for analysis on human brain or electrophysiological datasets.
 \end{itemize}
 
-Such applications are most effective when deployed on cloud-optimized datasets. This means that data must be accessible in a cloud or distributed storage friendly format, like Zarr for multi-dimensional data, Cloud optimized Geotiff for satellite imagery, or Parquet for tabular data. See \cite{b7} for more details on this crucial point. Formats like NetCDF or CSV files are not adapted or optimized for use at scale.
+As the computational resources necessary for most of these applications can only
+be met with distributed computing, the data must be in a cloud or distributed
+storage friendly format, like Zarr for multi-dimensional data, Cloud optimized
+Geotiff for satellite imagery, or Parquet for tabular data. See \cite{b7} and
+\cite{b11} for more details on this crucial point.
 
 \subsection{Ongoing work}
 \label{ssec:ongowork}
 
-The community is active and working on improving Pangeo possibilities and accessibility. This includes the following ongoing tasks:\begin{itemize}
-\item Active work for giving everyone the possibility to try Pangeo at scale with a simple clic. This is made possible by using Binder along with the ecosystem\cite{b8}.
-\item Community governance: the project is still young, it needs further organization. A lot of work was initiated on this in the last Pangeo developper meeting this summer.
-\item It has recently been decided to offer a specific cloud environment for the different scientific communities, in order to cope with each domain specific software stack.
-\item In order to achieve the above point, intensive work is currently being done on simplifying Cloud environment updates, by using modern tooling for Continous Deployment using Hubploy and CircleCI.
-\item As Pangeo is compatible not only with cloud but with different infrastructure, several Dask subcomponents share some logic for deploying clusters. A work to rationalize this logic and separate resources management from Dask scheduling is also ongoing.
+The community and the technological stack are currently advanced along the
+following lines:
+\begin{itemize}
+\item To facilitate learning and using the Pangeo software stack at scale, there is a Binder deployment\cite{b8} providing access to a cloud-based platform with a single click.
+\item To actively foster collaboration and to make sure that Pangeo remains a diverse and inclusive project, an emerging focus is on community governance.
+\item To better cope with domain-specific software and hardware requirements at this stage of the development, the formerly single example deployment of Pangeo has been split into many specific environments.  This helps with reaching out to new fields and yields increasingly automated work flows for cloud environment updates using modern tooling for Continuous Deployment with Hubploy and CircleCI.
+\item To reach out to possible new collaborators but also to enable more and more interested scientists, Pangeo members offer workshops in various settings.
 \end{itemize}
 
 \section{CNES deployment and use cases}
@@ -185,7 +220,7 @@ CNES main processing platform is a modestly sized High Performance Computer name
 
 Pangeo platform has recently been deployed on the cluster, which basically means the configuration of two main components: a JupyterHub and Dask through dask-jobqueue (see \ref{dask_jobqueue} for a graphical overview).
 
-JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launch user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook. 
+JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launch user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook.
 
 CNES directly contributes to dask-jobqueue in order to improve its usability on HAL. This Python module deployment (alike Xarray or other domain scientific library) is quite simple as it can be done through conda or pip packaging system. A template configuration is proposed to all HAL users. There is also a few commands documented in order to be able to use the Python environment and thus create Dask clusters from inside Jupyter, some demonstration notebooks have been shared internally.
 
@@ -228,7 +263,7 @@ At CNES, we decided to focus on this tooling for our shared computing infrastruc
 
 
 % References should be produced using the bibtex program from suitable
-% BiBTeX files 
+% BiBTeX files
 % -------------------------------------------------------------------------
 
 \bibliographystyle{plainnat}
@@ -237,15 +272,20 @@ At CNES, we decided to focus on this tooling for our shared computing infrastruc
 \small
 
 \begin{thebibliography}{00}
-\bibitem{b1} Ryan Abernathey, Kevin Paul, Joseph Hamman, Matthew Rocklin, Chiara Lepore, Michaem Tippett, et al. (2017): \href{https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094}{Pangeo NSF Earthcube Proposal}. 
-\bibitem{b2} Mark McInerney, ESDIS Project Deputy Project Manager/Technical: EOSDIS Cloud Evolution\href{https://earthdata.nasa.gov/about/eosdis-cloud-evolution}{NASA EOSDIS web site}. 
-\bibitem{b3} Ryan Abernathey et al: \href{https://github.com/pangeo-data/pangeo/issues}{Pangeo github project issue tracker}. 
-\bibitem{b4} Joseph Hamman, Matthew Rocklin, Jim Edwards, Guillaume Eynard-Bontemps, Loïc Estève (2018): \href{https://medium.com/pangeo/dask-jobqueue-d7754e42ca53}{Scalable interactive analysis workflows using dask on HPC Systems}. 
-\bibitem{b5} Pangeo community: \href{http://pangeo.io/use_cases/index.html}{Pangeo use cases}. 
-\bibitem{b6} Scott Henderson, Daniel Rothenberg, Matthew Rocklin, Ryan Abernathey, Joseph Hamman, Rich Signell, and Rob Fatland: \href{https://medium.com/pangeo/cloud-native-geoprocessing-of-earth-observation-satellite-data-with-pangeo-997692d91ca2}{Cloud Native Geoprocessing of Earth Observation Satellite Data with Pangeo}. 
+\bibitem{b1} Ryan Abernathey, Kevin Paul, Joseph Hamman, Matthew Rocklin, Chiara Lepore, Michaem Tippett, et al. (2017): \href{https://figshare.com/articles/Pangeo_NSF_Earthcube_Proposal/5361094}{Pangeo NSF Earthcube Proposal}.
+\bibitem{b2} Mark McInerney, ESDIS Project Deputy Project Manager/Technical: EOSDIS Cloud Evolution\href{https://earthdata.nasa.gov/about/eosdis-cloud-evolution}{NASA EOSDIS web site}.
+\bibitem{b3} Ryan Abernathey et al: \href{https://github.com/pangeo-data/pangeo/issues}{Pangeo github project issue tracker}.
+\bibitem{b4} Joseph Hamman, Matthew Rocklin, Jim Edwards, Guillaume Eynard-Bontemps, Loïc Estève (2018): \href{https://medium.com/pangeo/dask-jobqueue-d7754e42ca53}{Scalable interactive analysis workflows using dask on HPC Systems}.
+\bibitem{b5} Pangeo community: \href{http://pangeo.io/use_cases/index.html}{Pangeo use cases}.
+\bibitem{b6} Scott Henderson, Daniel Rothenberg, Matthew Rocklin, Ryan Abernathey, Joseph Hamman, Rich Signell, and Rob Fatland: \href{https://medium.com/pangeo/cloud-native-geoprocessing-of-earth-observation-satellite-data-with-pangeo-997692d91ca2}{Cloud Native Geoprocessing of Earth Observation Satellite Data with Pangeo}.
 \bibitem{b7} Ryan Abernathey: \href{https://medium.com/pangeo/step-by-step-guide-to-building-a-big-data-portal-e262af1c2977}{Step-by-Step Guide to Building a Big Data Portal}.
 \bibitem{b8} Joseph Hamman, Ryan Abernathey: \href{https://medium.com/pangeo/pangeo-meets-binder-2ea923feb34f}{Pangeo meets Binder}.
 \bibitem{b9} S. Fresnay, A. L. Ponte, S. Le Gentil, and J. Le Sommer: Reconstruction of the 3-D Dynamics From Surface Variables in
 a High-Resolution Simulation of North Atlantic. \href{https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2017JC013400}{DOI: 10.1002/2017JC013400}.
+\bibitem{b10} Joe Hamman: \href{https://medium.com/pangeo/nasa-access-c3515a44f31b}{Pangeo applications for NASA Earth Observing Data}.
+\bibitem{b11} Matthew Rocklin: \href{https://matthewrocklin.com/blog/work/2018/02/06/hdf-in-the-cloud}{HDF in the Cloud --- Challenges and solutions for scientific data}.
+\bibitem{b12} Dask Development Team: \href{https://dask.org}{Dask: Library for dynamic task scheduling}, 2016.
+\bibitem{b13} Stephan Hoyer and Joseph~J. Hamman: xarray: N-d labeled arrays and datasets in python. \emph{Journal of Open Research Software}, 5, apr 2017. \doi{10.5334/jors.148}.
+\bibitem{b14} Thomas Kluyver, Benjamin Ragan-Kelley, Fernando P{\'e}rez, Brian Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley, Jessica Hamrick, Jason Grout, Sylvain Corlay, Paul Ivanov, Dami{\'a}n Avila, Safia Abdalla, and Carol Willing: Jupyter notebooks -- a publishing format for reproducible computational workflows. In F.~Loizides and B.~Schmidt, editors, \emph{Positioning and Power in Academic Publishing: Players, Agents and Agendas}, pages 87 -- 90. IOS Press, 2016. \doi{10.3233/978-1-61499-649-1-87}.
 \end{thebibliography}
 \end{document}
