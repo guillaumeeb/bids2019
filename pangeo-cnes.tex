@@ -243,10 +243,6 @@ client = Client(cluster)
 futures = client.map(my_costly_simulation, 
                      input_params)
 results = client.gather(futures)
-
-# Compute and plot the mean on time series
-df[['x', 'y']].resample('2w').mean()
-              .compute().plot()
 \end{minted}
 \caption{\label{ep_dask_code} Embarrassingly parallel workload using Dask.}
 \end{figure}
@@ -263,17 +259,17 @@ Pangeo, mainly through Dask, gives an adequate solution to all these problems (s
 \subsection{Surface ocean currents analysis at scale}
 \label{ssec:usecase3}
 
-Ifremer (Institut français de recherche pour l'exploitation de la mer) used CNES
-Pangeo provided tooling to develop and run one of 
-\href{https://github.com/apatlpo/mit_equinox/blob/master/hal/rechunk_rotspectra.ipynb}{their workflow}. Ifremer already used Dask before\cite{b9}.
-
+Ifremer (Institut français de recherche pour l'exploitation de la mer) recently used 
+Pangeo tools and the CNES HPC cluster to develop and run one of 
+\href{https://github.com/apatlpo/mit_equinox/blob/master/hal/rechunk_rotspectra.ipynb}{their workflow}. Ifremer had already used Dask before for scientific applications\cite{b9}.
 Surface ocean currents from a global high resolution numerical simulation are analyzed in order to compute time-frequency kinetic energy spectra.
 Spectra are averaged zonally in order to emphasize meridional variations of these spectra.
 These spectra may be compared to observed estimates in order to validate the numerical model for example.
+Such validation are critical because these numerical simulations are used in order to perform Observing System Simulation Experiments (OSSEs) for missions that are either under development (e.g. SWOT) or proposed (e.g. SKIM).
 The input data consists of a collection of snapshots which is a layout that does not allow computations that are global in time such as an \textit{fft}.
 The analysis thus starts with a rechunking of the data into larger temporal chunks and smaller spatial ones.
 Spectra are then computed and averaged in latitude bins.
-Each of the latter stage leverage the distribution of existing sequential \textit{fft} code to Xarray objects via the \textit{apply_ufunc} method.
+Each of the latter stage leverage the distribution of existing sequential \textit{fft} code to Xarray objects via the \textit{apply\textunderscore ufunc} method.
 
 
 \section{Conclusion}
