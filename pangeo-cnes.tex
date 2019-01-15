@@ -25,11 +25,12 @@
 % Single address.
 % ---------------
 \name{Guillaume Eynard-Bontemps$^1$, Ryan Abernathey$^2$, Joseph Hamman$^3$, Aurelien Ponte$^4$, Willi Rath$^5$}%\thanks{Thanks to XYZ agency for funding.}}
-\address{$^1$Centre National d'Etudes Spatiales (CNES), Toulouse, France,\\
-$^2$Columbia University / Lamont Doherty Earth Observatory, New-York, USA,\\
-$^3$National Center for Atmospheric Research (NCAR), Boulder, USA,\\
-$^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et Spatiale (LOPS), IUEM, Brest 29280, France,\\
-$^5$GEOMAR Helmholtz Centre for Ocean Research Kiel, Kiel, Germany.}
+\address{{\small $^1$Centre National d'Etudes Spatiales (CNES), Toulouse, France,}\\
+{\small $^2$Columbia University / Lamont Doherty Earth Observatory, New-York, USA,}\\
+{\small $^3$National Center for Atmospheric Research (NCAR), Boulder, USA,}\\
+{\small $^4$Ifremer, Univ. Brest, CNRS, IRD,  Laboratoire d’Océanographie Physique et Spatiale (LOPS), IUEM, Brest 29280, France,}\\
+{\small $^5$GEOMAR Helmholtz Centre for Ocean Research Kiel, Kiel, Germany.}}
+
 %
 % For example:
 % ------------
@@ -136,22 +137,23 @@ The integration of a Zarr backend in Xarray paved the way to directly access clo
 \subsection{How Pangeo compares to other solutions}
 \label{ssec:pangeoadvantages}
 
-Pangeo primarily offers interactive or batch analysis of scientific datasets at scale. 
+Pangeo primarily offers tools and environments for interactive or batch analysis of scientific datasets at scale. 
 At the heart of this sentence are the three packages mentioned above: 
 Jupyter for interactive, Dask for scale, Xarray (and Dask) for scientific 
 datasets.
 As such it can be compared to a lot of existing tools. We can think of 
-\href{https://spark.apache.org/}{Apache Spark}, Rasdaman, SciDB, Myria,
-or even more specific library like TensorFlow or 
+\href{https://spark.apache.org/}{Apache Spark}, \href{http://www.rasdaman.com/}{Rasdaman}, 
+\href{https://www.paradigm4.com/try_scidb/}{SciDB}, \href{http://myria.cs.washington.edu/}{Myria},
+or even more specific libraries like \href{https://www.tensorflow.org/}{TensorFlow} or 
 \href{https://www.orfeo-toolbox.org/}{Orfeo ToolBox (OTB)}. First ones are
 already mentioned in a paper about imagery analysis \cite{b4_2} (where they
-are compared to Dask only).
+are compared to Dask only), which gives a good first overview.
 
 Pangeo is not another Datacube or scientific database, but you can
 build one using its core packages, as the 
 \href{https://www.opendatacube.org}{Open Data Cube} team is doing. Xarray
 backed by Dask allows powerful and at scale complex data manipulation such as
-regridding, datasets fusion and so one. Another example shows how to perform some 
+regridding, datasets fusion and so one. Another demonstrated use is to perform some 
 \href{https://earthengine.google.com/}{Google Earth Engine} like
 analysis using Pangeo \cite{b6}.
 
@@ -164,7 +166,7 @@ conclusive.
 
 Dask and Xarray can be leveraged interactively from a Jupyter notebook plugged to
 a compute infrastructure (e.g. HPC or Kubernetes cluster in the Cloud). A user
-can make use of the computing power with two or three lines of code and perform
+can make use of the computing power with a few lines of code and perform
 manipulation on tens of Terabytes of data as if handling some Megabytes on its
 own laptop.
 
@@ -178,13 +180,15 @@ data before feeding it to TensorFlow or other Deep Learning libraries.
 \subsection{Deployment}
 \label{ssec:deployment}
 
-The GitHub community offers online documentation, scripts and other tools to link them together in order to deploy a Pangeo platform (see \ref{pangeo_stack}) and put the software stack on HPC systems or in the public cloud. The main elements allowing to build and use the platform in the cloud are a set of scripts and documentation that allows automatically creating the necessary cloud infrastructure (a Kubernetes autoscaling cluster), a Helm-chart and associated Docker image, which heavily relies on Jupyterhub solutions. This is currently available for Google Cloud Engine (GCE), and work is underway for Amazon Web Services (AWS) compatibility. Continuous Deployment tooling is also used for automating new Pangeo versions deployment with Hubploy and CircleCI. To facilitate learning and using the Pangeo software stack at scale, there is a Binder deployment\cite{b8} enabling the live execution of any compatible github repo (providing environment description and some example notebooks) in a single click, on Pangeo existing Google cloud infrastructure.
+The GitHub community offers online documentation, scripts and other tools to link them together in order to deploy a Pangeo platform (see \ref{pangeo_stack}) and put the software stack on HPC systems or in the public cloud. The main elements allowing to build and use the platform in the cloud are a set of scripts and documentation that allows automatically creating the necessary cloud infrastructure (a Kubernetes autoscaling cluster), a Helm-chart and associated Docker image, which heavily relies on Jupyterhub solutions. This is currently available for Google Cloud Engine (GCE), and work is underway for documenting Amazon Web Services (AWS) use. Continuous Deployment tooling is also used for automating new Pangeo versions deployment with Hubploy and CircleCI.
+
+To facilitate learning and using the Pangeo software stack at scale, there is a Binder deployment\cite{b8} enabling the live execution of any compatible github repo (providing environment description and some example notebooks) in a single click, on Pangeo existing Google cloud infrastructure.
 
 
 \subsection{Applications and data}
 \label{ssec:applications}
 
-There are already several applications documented in earth-system sciences that can be found online\cite{b5}; these examples can be directly executed on cloud infrastructure from a web browser, associated datasets are also published on Pangeo public bucket in a Cloud friendly format. 
+There are already several applications documented in earth-system sciences that can be found online\cite{b5}. These examples can be directly executed on cloud infrastructure from a web browser, associated datasets are also published on Pangeo public bucket. 
 Other scientific domains have developed an interest in the Pangeo approach, including Satellite imagery analysis \cite{b6}, Astronomy or Neuroscience.
 
 As the computational resources necessary for most of these applications can only
@@ -200,14 +204,18 @@ Geotiff for satellite imagery, or Parquet for tabular data. See \cite{b7} and
 \subsection{Context and projects}
 \label{ssec:context}
 
-The Centre National d'Etudes Spatiales (CNES) is the government agency responsible for shaping and implementing France's space policy in Europe. As such it covers a wide range of subjects: Ariane launcher, Sciences, Earth observation, telecommunication and defence.
+The Centre National d'Etudes Spatiales (CNES) is the government agency responsible for shaping and implementing France's space policy in Europe. As such it covers a wide range of subjects: Ariane launcher, Sciences, Earth observation, telecommunication and defense.
 
-On the ground segment processing side, we are involved in several Big Data projects, most of them being hosted in CNES Data Center: one of the Gaia data processing center; Sentinel product Exploitation Platform, for sharing and online processing of Copernicus products; Surface Water and Ocean Topography (SWOT) mission...
+On the ground segment processing side, it is involved in several Big Data projects, most of them being hosted in CNES Data Center: one of the Gaia data processing center; Sentinel product Exploitation Platform, for sharing and online processing of Copernicus products; Surface Water and Ocean Topography (SWOT) mission...
 
 CNES HPC platform is also hosting a lot of other processing involving remote sensing data, flight dynamics, altimetry or other domains.
 
 \subsection{Pangeo on our HPC System}
 \label{ssec:pangeohpc}
+
+CNES main processing platform is a modestly sized High Performance Computer named HAL. Its computational resources are about 8000 Intel cores and 6PB high bandwidth storage. It uses PBS Pro jobqueue system to schedule the load on compute nodes and handle user and project resource sharing.
+
+Pangeo platform has recently been deployed on the cluster, which basically means the configuration of two main components: a JupyterHub, and Dask through dask-jobqueue (see \ref{dask_jobqueue} for a graphical overview). JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launches user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook.
 
 \begin{figure}
   \centering
@@ -215,14 +223,17 @@ CNES HPC platform is also hosting a lot of other processing involving remote sen
   \caption{\label{dask_jobqueue} Computation in Jupyter and Dask dashboard.}
 \end{figure}
 
-CNES main processing platform is a modestly sized High Performance Computer named HAL. Its computational resources are about 8000 Intel cores and 6PB high bandwidth storage. It uses PBS Pro jobqueue system to schedule the load on compute nodes and handle user and project resource sharing.
-
-Pangeo platform has recently been deployed on the cluster, which basically means the configuration of two main components: a JupyterHub, and Dask through dask-jobqueue (see \ref{dask_jobqueue} for a graphical overview). JupyterHub has been deployed on a Virtual Machine, which has direct access to HAL cluster through PBS commands. This allows configuring JupyterHub Batchspawner which launches user notebooks using PBS \textit{qsub} command, alongside Wrapspwaner to be able to select adequate system resources for launched notebook.
-
 CNES directly contributes to dask-jobqueue in order to improve its usability on HAL. This Python module deployment (alike Xarray or other domain scientific library) is quite simple as it can be done through conda or pip packaging system. All of this is documented, and some demonstration notebooks have been shared internally.
 
 \subsection{From embarrassingly parallel to more complex workflows with Dask}
 \label{ssec:usecase1}
+
+One important use of our cluster is to do repetitive jobs: apply the same computation or process to several inputs, which can for example be a list of files or a list of parameters. This is usually done with job arrays PBS mechanism. Results are then written into our central storage facility, and a final job gathers and consolidates them if needed. There are three main drawbacks to this approach:
+\begin{itemize}
+\item When scaling this mechanism to hundreds of thousands and short (under one minute) jobs, this can lead to PBS scheduler contention and slow responsiveness.
+\item This often means a lot of bash script and machinery to chain several analysis together, leading to workflows that are hardly readable and difficult to maintain.
+\item As results can be really small and are exchanged through a centralized storage system, this also means a lot of I/O load onto the File System and side effects for other users.
+\end{itemize}
 
 \begin{figure}
 \begin{minted}[linenos,
@@ -247,14 +258,7 @@ results = client.gather(futures)
 \caption{\label{ep_dask_code} Embarrassingly parallel workload using Dask.}
 \end{figure}
 
-One important use of our cluster is to do repetitive jobs: apply the same computation or process to several inputs, which can for example be a list of files or a list of parameters. This is usually done with job arrays PBS mechanism. Results are then written into our central storage facility, and a final job gathers and consolidates them if needed. There are three main drawbacks to this approach:
-\begin{itemize}
-\item When scaling this mechanism to hundreds of thousands and short (under one minute) jobs, this can lead to PBS scheduler contention and slow responsiveness.
-\item This often means a lot of bash script and machinery to chain several analysis together, leading to workflows that are hardly readable and difficult to maintain.
-\item As results can be really small and are exchanged through a centralized storage system, this also means a lot of I/O load onto the File System and side effects for other users.
-\end{itemize}
-
-Pangeo, mainly through Dask, gives an adequate solution to all these problems (see \ref{ep_dask_code} for an example). All the workflow, cluster creation, data management parts are handled from Python code. Reservation to PBS are done using dask-mpi or dask-jobqueue. No need to write or exchange data through disk, all data management is done through memory or network with TCP over high-speed networks (i.e. Infiniband). This allows users to analyze the result of a simulation in the same piece of code where it has been launched, and eventually gather only the reduced valuable part for later use. The result of all this is elegant and simple Python code, which can scale easily to thousands of cores and does not stress our HPC cluster.
+Pangeo, mainly through Dask, gives an adequate solution to all these problems (see \ref{ep_dask_code} for an example). All the workflow, cluster creation, data management parts are handled from Python code. Reservation to PBS are done using dask-mpi or dask-jobqueue. No need to write or exchange data through disk, all data management is done through memory or high-speed network. This allows users to analyze the result of a simulation in the same piece of code where it has been launched, and eventually gather only the reduced valuable part for later use. The result of all this is elegant and simple Python code, which can scale easily to thousands of cores and does not stress our HPC cluster.
 
 \subsection{Surface ocean currents analysis at scale}
 \label{ssec:usecase3}
@@ -262,6 +266,7 @@ Pangeo, mainly through Dask, gives an adequate solution to all these problems (s
 Ifremer (Institut français de recherche pour l'exploitation de la mer) recently used 
 Pangeo tools and the CNES HPC cluster to develop and run one of 
 \href{https://github.com/apatlpo/mit_equinox/blob/master/hal/rechunk_rotspectra.ipynb}{their workflow}. Ifremer had already used Dask before for scientific applications\cite{b9}.
+
 Surface ocean currents from a global high resolution numerical simulation are analyzed in order to compute time-frequency kinetic energy spectra.
 Spectra are averaged zonally in order to emphasize meridional variations of these spectra.
 These spectra may be compared to observed estimates in order to validate the numerical model for example.
